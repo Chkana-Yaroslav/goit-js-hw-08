@@ -68,7 +68,7 @@ const images = [
 
 const galleryBox = document.querySelector(".gallery");
 
-galleryBox.innerHTML = images.reduce((html, image) => html + `<li class="gallery-item"><a class="gallery-link" href="large-image.jpg"><img class="gallery-image" src="${image.preview}" data-source="${image.original}" alt="${image.description}" width="300px"></a></li>`, "");
+galleryBox.innerHTML = images.reduce((html, image) => html + `<li class="gallery-item"><a class="gallery-link" href="${image.original}"><img class="gallery-image" src="${image.preview}" data-source="${image.original}" alt="${image.description}" width="300px"></a></li>`, "");
 
 
 galleryBox.style.display = "flex";
@@ -79,14 +79,14 @@ galleryBox.style.listStyleType = "none";
 const myModal = basicLightbox.create(`<img class="big-gallery-image" src="" width="1112px" height="640px">`,
       {
         onShow: () => {
-          document.addEventListener('keydown', removeEventListener);
+          document.addEventListener('keydown', onEscapeKeyPress );
         }, 
         onClose: () => {
-          document.removeEventListener('keydown', removeEventListener);
+          document.removeEventListener('keydown', onEscapeKeyPress );
         }
     });
 
-function removeEventListener(event) {
+function onEscapeKeyPress (event) {
   if (event.code === 'Escape') {
     myModal.close();
   }
